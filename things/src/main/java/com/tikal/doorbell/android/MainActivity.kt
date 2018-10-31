@@ -1,15 +1,11 @@
 package com.tikal.doorbell.android
 
-import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.KeyEvent
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
+import timber.log.Timber
 
 /**
  * Skeleton of an Android Things activity.
@@ -49,9 +45,6 @@ class MainActivity : AppCompatActivity() {
         mp = MediaPlayer.create(this, R.raw.doorbell)
         doorManager = DoorManager()
         doorManager.blink()
-
-        Log.i(TAG, "onCreate")
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
     }
 
     override fun onDestroy() {
@@ -90,12 +83,13 @@ class MainActivity : AppCompatActivity() {
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
         // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
-            Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")
+            Timber.i("doorbell button pressed")
             if (mp.isPlaying)
                 mp.stop()
             mp.release()
             mp = MediaPlayer.create(this, R.raw.doorbell)
             mp.start()
+            return true
         }
         return super.onKeyUp(keyCode, event)
     }

@@ -12,9 +12,9 @@ import timber.log.Timber
 
 class KeypadPresenter : KeypadContract.Presenter {
 
+    private lateinit var doorbellCode: String
+    private lateinit var view: KeypadContract.View
     val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatesource())
-    lateinit var doorbellCode: String
-    lateinit var view: KeypadContract.View
 
     val enteredCode = StringBuffer()
 
@@ -24,28 +24,27 @@ class KeypadPresenter : KeypadContract.Presenter {
     }
 
     override fun subscribe(view: KeypadContract.View) {
-        Log.i(TAG, "KeypadPresenter: init")
+        Timber.i("KeypadPresenter: init")
         this.view = view
         subscribeDatabase()
     }
 
-    override fun unSubscribe() {
+    override fun unsubscribe() {
     }
-
 
     fun subscribeDatabase() {
         repository.getCode()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            doorbellCode = it
-                            Timber.i("### $it")
-                            view.toast(it)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onNext = {
+                    doorbellCode = it
+                    Timber.i("### $it")
+                    view.toast(it)
 
-                        },
-                        onError = { Timber.e(it) }
-                )
+                },
+                onError = { Timber.e(it) }
+            )
 
     }
 
@@ -67,6 +66,4 @@ class KeypadPresenter : KeypadContract.Presenter {
         view.updateEnteredCode(enteredCode.toString())
 
     }
-
-
 }
