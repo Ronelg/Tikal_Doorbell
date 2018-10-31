@@ -31,6 +31,7 @@ class DoorBellButton {
 
             // Register the driver against AoT
             btnDriver.register()
+            Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button driver ready")
         } catch (e: IOException) {
             Log.e(BoardDefaults.HW_DOORBELL_BUTTON, "failed to initiate doorbell button driver", e)
             throw HardwareException(BoardDefaults.HW_DOORBELL_BUTTON, e.message)

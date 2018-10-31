@@ -5,11 +5,9 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import android.widget.Button
 
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -37,6 +35,8 @@ class MainActivity : Activity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var storage: FirebaseStorage
     private lateinit var doorManager: DoorManager
+    private lateinit var mp: MediaPlayer
+    private lateinit var dbButton: DoorBellButton
 
     private var isLedOn: Boolean = false
     private var isBlinking: Boolean = false
@@ -47,6 +47,10 @@ class MainActivity : Activity() {
 
 //        database = FirebaseDatabase.getInstance()
 //        storage = FirebaseStorage.getInstance()
+
+        dbButton = DoorBellButton()
+        mp = MediaPlayer.create(this, R.raw.doorbell)
+
         doorManager = DoorManager()
 
         btnOnOff.setOnClickListener {
@@ -112,8 +116,14 @@ class MainActivity : Activity() {
      * Plays a doorbell sound when the doorbell button is pushed.
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+
+        // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
-            val mp = MediaPlayer.create(this, R.raw.doorbell)
+            Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")
+            if (mp.isPlaying)
+                mp.stop()
+            mp.release()
+            mp = MediaPlayer.create(this, R.raw.doorbell)
             mp.start()
         }
         return super.onKeyUp(keyCode, event)
