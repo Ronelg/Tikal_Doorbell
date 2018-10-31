@@ -4,7 +4,9 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
+import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 /**
@@ -74,7 +76,9 @@ class MainActivity : AppCompatActivity() {
         doorManager.blink()
 
         Timber.i("onCreate")
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, KeypadFragment())
+                .commit()
     }
 
     override fun onDestroy() {

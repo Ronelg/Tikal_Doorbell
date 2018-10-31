@@ -1,6 +1,5 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import android.util.Log
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,20 +15,15 @@ class KeypadPresenter : KeypadContract.Presenter {
     private lateinit var view: KeypadContract.View
     private var codeObservable: Disposable? = null
 
-    companion object {
-        const val TAG = "KeypadPresenter"
-    }
-
     override fun subscribe(view: KeypadContract.View) {
         Timber.i("KeypadPresenter: init")
         this.view = view
         subscribeDatabase()
     }
 
-    override fun unSubscribe() {
+    override fun unsubscribe() {
         codeObservable?.dispose()
     }
-
 
     fun subscribeDatabase() {
         codeObservable = repository.getCode()

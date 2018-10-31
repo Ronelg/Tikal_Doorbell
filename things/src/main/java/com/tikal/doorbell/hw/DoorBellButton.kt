@@ -27,8 +27,8 @@ class DoorBellButton {
         try {
             // Associate the button driver with the target GPIO
             btnDriver = ButtonInputDriver(BoardDefaults.gpioForButton,
-                Button.LogicState.PRESSED_WHEN_LOW,
-                KeyEvent.KEYCODE_ENTER)
+                    Button.LogicState.PRESSED_WHEN_LOW,
+                    KeyEvent.KEYCODE_ENTER)
 
             // Register the driver against AoT
             btnDriver.register()
