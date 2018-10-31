@@ -1,11 +1,9 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import android.util.Log
-import android.widget.Toast
-import com.tikal.doorbell.android.BaseView
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -22,6 +20,7 @@ class KeypadPresenter : KeypadContract.Presenter {
         const val TAG = "KeypadPresenter"
         const val DOORBELL_CODE_LENGTH = 4;
     }
+    private var codeObservable: Disposable? = null
 
     override fun subscribe(view: KeypadContract.View) {
         Timber.i("KeypadPresenter: init")
@@ -30,21 +29,22 @@ class KeypadPresenter : KeypadContract.Presenter {
     }
 
     override fun unsubscribe() {
+        codeObservable?.dispose()
     }
 
     fun subscribeDatabase() {
-        repository.getCode()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onNext = {
-                    doorbellCode = it
-                    Timber.i("### $it")
-                    view.toast(it)
+        codeObservable = repository.getCode()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onNext = {
+                            doorbellCode = it
+                            Timber.i("### $it")
+                            view.toast(it)
 
-                },
-                onError = { Timber.e(it) }
-            )
+                        },
+                        onError = { Timber.e(it) }
+                )
 
     }
 

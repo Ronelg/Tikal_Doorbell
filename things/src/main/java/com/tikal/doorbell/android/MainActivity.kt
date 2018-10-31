@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import com.tikal.doorbell.hw.DoorBellButton
+import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 /**
@@ -29,13 +30,12 @@ import timber.log.Timber
  */
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        const val TAG = "MainActivity"
-    }
-
     private lateinit var doorManager: DoorManager
     private lateinit var mp: MediaPlayer
     private lateinit var dbButton: DoorBellButton
+
+    private var isLedOn: Boolean = false
+    private var isBlinking: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +43,42 @@ class MainActivity : AppCompatActivity() {
 
         dbButton = DoorBellButton()
         mp = MediaPlayer.create(this, R.raw.doorbell)
+
         doorManager = DoorManager()
+
+        btnOnOff.setOnClickListener {
+            if (isLedOn) {
+                lockDoor()
+                btnOnOff.text = "On"
+                if (isBlinking) {
+                    doorManager.stopBlink()
+                }
+            } else {
+                openDoor()
+                btnOnOff.text = "Off"
+            }
+            isLedOn = !isLedOn
+            Timber.d("isLedOn: $isLedOn")
+        }
+
+        btnBlink.setOnClickListener {
+            Timber.d("Blinking...")
+            if (isBlinking) {
+                doorManager.stopBlink()
+                btnBlink.text = "Blinking"
+            } else {
+                doorManager.blink()
+                btnBlink.text = "Stop Blinking"
+            }
+            isBlinking = !isBlinking
+        }
         doorManager.blink()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         doorManager.destroy()
+        dbButton.destroy()
     }
 
     private fun handleAccessDenied() {
@@ -79,13 +108,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * Plays a doorbell sound when the doorbell button is pushed.
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        Timber.d("onKeyUp $keyCode $event")
+
         // Plays a doorbell sound when the doorbell button is pushed.
-        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+        if (keyCode == KeyEvent.KEYCODE_F1) {
             Timber.i("doorbell button pressed")
-            if (mp.isPlaying)
+            if (mp.isPlaying) {
                 mp.stop()
+            }
             mp.release()
             mp = MediaPlayer.create(this, R.raw.doorbell)
             mp.start()
