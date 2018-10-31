@@ -16,8 +16,11 @@ class KeypadPresenter : KeypadContract.Presenter {
     lateinit var doorbellCode: String
     lateinit var view: KeypadContract.View
 
+    val enteredCode = StringBuffer()
+
     companion object {
         const val TAG = "KeypadPresenter"
+        const val DOORBELL_CODE_LENGTH = 4;
     }
 
     override fun subscribe(view: KeypadContract.View) {
@@ -46,8 +49,23 @@ class KeypadPresenter : KeypadContract.Presenter {
 
     }
 
-    override fun onKeypadNumberClicked(num: Int) {
-        Timber.i("### onKeypadNumberClicked $num")
+    override fun onKeypadNumberClicked(value: String) {
+        enteredCode.append(value)
+        verifyCode(value)
+    }
+
+    fun verifyCode(value : String){
+        if(enteredCode.length <= DOORBELL_CODE_LENGTH){
+            if(value.equals(enteredCode)){
+                view.toast("Door Open")
+            }else{
+                view.toast("Invalid Code")
+            }
+        } else {
+            enteredCode.replace(0, enteredCode.length, "");
+        }
+        view.updateEnteredCode(enteredCode.toString())
+
     }
 
 

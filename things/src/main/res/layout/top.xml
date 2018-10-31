@@ -32,7 +32,7 @@
         android:hint="@string/txt_password_hint"
         android:inputType="numberPassword"
         android:textAlignment="center"
-        android:textSize="@dimen/txt_pad_font_size"
+        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

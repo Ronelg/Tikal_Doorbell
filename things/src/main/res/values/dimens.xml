@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="txt_pad_font_size">18sp</dimen>
     <dimen name="txt_delete_font_size">22sp</dimen>
     <dimen name="txt_top_font_size">22sp</dimen>
     <dimen name="txt_pad_padding">0dp</dimen>
