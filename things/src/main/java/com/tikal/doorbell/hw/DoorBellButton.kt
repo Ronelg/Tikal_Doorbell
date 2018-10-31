@@ -38,4 +38,8 @@ class DoorBellButton {
             throw HardwareException(BoardDefaults.HW_DOORBELL_BUTTON, e.message)
         }
     }
+
+    fun destroy() {
+        btnDriver.unregister()
+    }
 }
