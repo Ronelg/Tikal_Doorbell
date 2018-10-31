@@ -1,16 +1,12 @@
 package com.tikal.doorbell.android
 
-import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
+import com.tikal.doorbell.android.R.id.btnOnOff
+import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 /**
  * Skeleton of an Android Things activity.
@@ -32,10 +28,12 @@ import kotlinx.android.synthetic.main.activity_main.*
  * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
  *
  */
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var database: FirebaseDatabase
-    private lateinit var storage: FirebaseStorage
+    companion object {
+        const val TAG = "MainActivity"
+    }
+
     private lateinit var doorManager: DoorManager
     private lateinit var mp: MediaPlayer
     private lateinit var dbButton: DoorBellButton
@@ -46,9 +44,6 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        database = FirebaseDatabase.getInstance()
-//        storage = FirebaseStorage.getInstance()
 
         dbButton = DoorBellButton()
         mp = MediaPlayer.create(this, R.raw.doorbell)
@@ -81,6 +76,10 @@ class MainActivity : Activity() {
             }
             isBlinking = !isBlinking
         }
+        doorManager.blink()
+
+        Log.i(TAG, "onCreate")
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
     }
 
     override fun onDestroy() {
