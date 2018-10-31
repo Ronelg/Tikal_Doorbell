@@ -3,6 +3,7 @@ package com.tikal.doorbell.android
 import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 
 import com.google.firebase.database.FirebaseDatabase
@@ -29,7 +30,7 @@ import com.google.firebase.storage.FirebaseStorage
  * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
  *
  */
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var database: FirebaseDatabase
     private lateinit var storage: FirebaseStorage
@@ -44,6 +45,8 @@ class MainActivity : Activity() {
 
         doorManager = DoorManager()
         doorManager.blink()
+
+//        supportFragmentManager.beginTransaction().replace(R.id.container, KeypadFragment()).commit()
     }
 
     override fun onDestroy() {
