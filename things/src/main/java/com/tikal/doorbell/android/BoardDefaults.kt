@@ -30,4 +30,9 @@ object BoardDefaults {
                 else -> throw IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE)
             }
         }
+
+    /**
+     * Hardware components.
+     */
+    const val HW_DOORBELL_BUTTON = "hw-db-btn"
 }

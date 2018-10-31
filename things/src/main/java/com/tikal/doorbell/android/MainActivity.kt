@@ -1,7 +1,10 @@
 package com.tikal.doorbell.android
 
 import android.app.Activity
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.KeyEvent
+
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -72,5 +75,16 @@ class MainActivity : Activity() {
     /** Unlock to open the door. */
     private fun openDoor() {
         doorManager.unlock()
+    }
+
+    /**
+     * Plays a doorbell sound when the doorbell button is pushed.
+     */
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            val mp = MediaPlayer.create(this, R.raw.doorbell)
+            mp.start()
+        }
+        return super.onKeyUp(keyCode, event)
     }
 }
