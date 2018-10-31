@@ -3,10 +3,11 @@ package com.tikal.doorbell.android
 import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
-
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.tikal.doorbell.hw.DoorBellButton
 
 
 /**
@@ -34,6 +35,8 @@ class MainActivity : Activity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var storage: FirebaseStorage
     private lateinit var doorManager: DoorManager
+    private lateinit var mp: MediaPlayer
+    private lateinit var dbButton: DoorBellButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,8 @@ class MainActivity : Activity() {
 //        database = FirebaseDatabase.getInstance()
 //        storage = FirebaseStorage.getInstance()
 
+        dbButton = DoorBellButton()
+        mp = MediaPlayer.create(this, R.raw.doorbell)
         doorManager = DoorManager()
     }
 
@@ -77,11 +82,12 @@ class MainActivity : Activity() {
     }
 
     /**
-     * Plays a doorbell sound when the doorbell button is pushed.
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+
+        // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
-            val mp = MediaPlayer.create(this, R.raw.doorbell)
+            Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")
             mp.start()
         }
         return super.onKeyUp(keyCode, event)
