@@ -4,12 +4,12 @@ import com.tikal.doorbell.android.BasePresenter
 import com.tikal.doorbell.android.BaseView
 
 interface KeypadContract {
-    interface Presenter:BasePresenter{
-        fun onKeypadNumberClicked(num : Int)
+    interface Presenter : BasePresenter {
+        fun onKeypadNumberClicked(num: Int)
     }
 
-    interface View : BaseView{
-
+    interface View : BaseView {
+        fun toast(text: String)
     }
 }
 
