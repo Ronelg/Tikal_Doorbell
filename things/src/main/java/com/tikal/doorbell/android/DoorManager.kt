@@ -2,7 +2,11 @@ package com.tikal.doorbell.android
 
 import com.google.android.things.pio.Gpio
 import com.google.android.things.pio.PeripheralManager
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import java.io.IOException
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Door manager.
@@ -23,6 +27,7 @@ class DoorManager {
 
     private val service = PeripheralManager.getInstance()
     private var ledGpio: Gpio? = null
+    private var blinker: Disposable? = null
 
     init {
         try {
@@ -43,6 +48,14 @@ class DoorManager {
     }
 
     fun destroy() {
+        blinker?.dispose()
         ledGpio?.close()
+    }
+
+    fun blink() {
+        blinker = Observable.interval(0L, 1L, TimeUnit.SECONDS)
+            .subscribe {
+                ledGpio?.value = it.rem(2L) == 0L
+            }
     }
 }

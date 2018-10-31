@@ -40,6 +40,7 @@ class MainActivity : Activity() {
 //        storage = FirebaseStorage.getInstance()
 
         doorManager = DoorManager()
+        doorManager.blink()
     }
 
     override fun onDestroy() {
