@@ -48,6 +48,7 @@ class MainActivity : Activity() {
         dbButton = DoorBellButton()
         mp = MediaPlayer.create(this, R.raw.doorbell)
         doorManager = DoorManager()
+        doorManager.blink()
     }
 
     override fun onDestroy() {
