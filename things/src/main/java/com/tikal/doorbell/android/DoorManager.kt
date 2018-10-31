@@ -21,16 +21,12 @@ import java.io.IOException
  */
 class DoorManager {
 
-    companion object {
-        private const val LED_PIN_NAME = "BCM16"
-    }
-
     private val service = PeripheralManager.getInstance()
     private var ledGpio: Gpio? = null
 
     init {
         try {
-            val led = service.openGpio(LED_PIN_NAME)
+            val led = service.openGpio(BoardDefaults.gpioForDoor)
             led.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
             ledGpio = led
         } catch (e: IOException) {

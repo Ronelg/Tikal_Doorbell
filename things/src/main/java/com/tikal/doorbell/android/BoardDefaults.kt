@@ -18,4 +18,16 @@ object BoardDefaults {
                 else -> throw IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE)
             }
         }
+
+    /**
+     * Return the GPIO pin that the door LED is connected on.
+     */
+    val gpioForDoor: String
+        get() {
+            when (Build.DEVICE) {
+                DEVICE_RPI3 -> return "BCM16"
+                DEVICE_IMX7D_PICO -> return "GPIO6_IO12"
+                else -> throw IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE)
+            }
+        }
 }
