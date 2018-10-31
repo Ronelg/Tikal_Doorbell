@@ -37,7 +37,7 @@ class DoorManager {
     init {
         try {
             val led = service.openGpio(BoardDefaults.gpioForDoor)
-            led.setDirection(Gpio.DIRECTION_OUT_INITIALLY_HIGH)
+            led.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
             ledGpio = led
         } catch (e: IOException) {
             e.printStackTrace()
