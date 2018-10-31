@@ -15,8 +15,7 @@ class DoorBellButton {
     // Button driver associated with PI3 doorbell GPIO
     lateinit var btnDriver: ButtonInputDriver
 
-    constructor() {
-        // Initiate the doorbell driver
+    init {
         initDriver()
     }
 

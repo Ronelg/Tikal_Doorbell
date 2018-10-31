@@ -53,6 +53,9 @@ class MainActivity : Activity() {
             if (isLedOn) {
                 lockDoor()
                 (it as Button).text = "On"
+                if (isBlinking) {
+                    doorManager.stopBlink()
+                }
             } else {
                 openDoor()
                 (it as Button).text = "Off"
@@ -65,8 +68,10 @@ class MainActivity : Activity() {
             Log.d("BtnBlink", "Blinking...")
             if (isBlinking) {
                 doorManager.stopBlink()
+                btnBlink.text = "Blinking"
             } else {
                 doorManager.blink()
+                btnBlink.text = "Stop Blinking"
             }
             isBlinking = !isBlinking
         }
