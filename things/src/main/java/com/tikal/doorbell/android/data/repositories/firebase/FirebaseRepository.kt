@@ -1,13 +1,15 @@
 package com.tikal.doorbell.android.data.repositories.firebase
 
 import com.tikal.doorbell.android.data.datasources.firebase.FbRealtimeDatabase
+import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
+import io.reactivex.Observable
 
-class FirebaseRepository : FbRealtimeDatabase {
+class FirebaseRepository(val remoteDatesource: FirebaseRemoteDatesource) : FbRealtimeDatabase {
 
 
 
-    override fun getCode(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getCode(): Observable<String> {
+        return remoteDatesource.getCode()
     }
 
     override fun updateCode(code: String) {

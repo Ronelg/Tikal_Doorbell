@@ -2,6 +2,9 @@ package com.tikal.doorbell.android
 
 import android.app.Activity
 import android.os.Bundle
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+
 
 /**
  * Skeleton of an Android Things activity.
@@ -25,8 +28,48 @@ import android.os.Bundle
  */
 class MainActivity : Activity() {
 
+    private lateinit var database: FirebaseDatabase
+    private lateinit var storage: FirebaseStorage
+    private lateinit var doorManager: DoorManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        database = FirebaseDatabase.getInstance()
+//        storage = FirebaseStorage.getInstance()
+
+        doorManager = DoorManager()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        doorManager.destroy()
+    }
+
+    private fun handleAccessDenied() {
+        showAccessDenied()
+        lockDoor()
+    }
+
+    private fun handleAccessGranted() {
+        showAccessGranted()
+        openDoor()
+    }
+
+    private fun showAccessDenied() {
+    }
+
+    private fun showAccessGranted() {
+    }
+
+    /** Ensure the door is locked. */
+    private fun lockDoor() {
+        doorManager.lock()
+    }
+
+    /** Unlock to open the door. */
+    private fun openDoor() {
+        doorManager.unlock()
     }
 }

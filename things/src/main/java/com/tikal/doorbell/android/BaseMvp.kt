@@ -1,7 +1,7 @@
-package com.tikal.doorbell.android.data
+package com.tikal.doorbell.android
 
 interface BasePresenter {
-    fun subscribe()
+    fun subscribe(view : BaseView)
     fun unSubscribe()
 }
 
