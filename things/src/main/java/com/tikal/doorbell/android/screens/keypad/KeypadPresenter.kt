@@ -1,5 +1,6 @@
 package com.tikal.doorbell.android.screens.keypad
 
+import android.util.Log
 import com.tikal.doorbell.android.BaseView
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
@@ -14,8 +15,12 @@ class KeypadPresenter : KeypadContract.Presenter {
     lateinit var doorbellCode: String
     lateinit var view: BaseView
 
+    companion object {
+        const val TAG = "KeypadPresenter"
+    }
 
-    override fun subscribe(view: BaseView) {
+    override fun subscribe(view : BaseView) {
+        Log.i(TAG, "KeypadPresenter: init")
         this.view = view
         subscribeDatabase()
     }
