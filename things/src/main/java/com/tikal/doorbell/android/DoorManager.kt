@@ -63,4 +63,8 @@ class DoorManager {
                 ledGpio?.value = it.rem(2L) == 0L
             }
     }
+
+    fun stopBlink() {
+        blinker?.dispose()
+    }
 }

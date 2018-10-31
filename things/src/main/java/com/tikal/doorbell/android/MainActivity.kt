@@ -3,10 +3,13 @@ package com.tikal.doorbell.android
 import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
+import android.widget.Button
 
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -35,15 +38,38 @@ class MainActivity : Activity() {
     private lateinit var storage: FirebaseStorage
     private lateinit var doorManager: DoorManager
 
+    private var isLedOn: Boolean = false
+    private var isBlinking: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 //        database = FirebaseDatabase.getInstance()
 //        storage = FirebaseStorage.getInstance()
-
         doorManager = DoorManager()
-        doorManager.blink()
+
+        btnOnOff.setOnClickListener {
+            if (isLedOn) {
+                lockDoor()
+                (it as Button).text = "On"
+            } else {
+                openDoor()
+                (it as Button).text = "Off"
+            }
+            isLedOn = !isLedOn
+            Log.d("BtnPress", "isLedOn: $isLedOn")
+        }
+
+        btnBlink.setOnClickListener {
+            Log.d("BtnBlink", "Blinking...")
+            if (isBlinking) {
+                doorManager.stopBlink()
+            } else {
+                doorManager.blink()
+            }
+            isBlinking = !isBlinking
+        }
     }
 
     override fun onDestroy() {
