@@ -36,8 +36,9 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        database = FirebaseDatabase.getInstance()
-        storage = FirebaseStorage.getInstance()
+//        database = FirebaseDatabase.getInstance()
+//        storage = FirebaseStorage.getInstance()
+
         doorManager = DoorManager()
     }
 

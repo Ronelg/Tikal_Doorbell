@@ -27,18 +27,18 @@ class DoorManager {
     init {
         try {
             val led = service.openGpio(BoardDefaults.gpioForDoor)
-            led.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
+            led.setDirection(Gpio.DIRECTION_OUT_INITIALLY_HIGH)
             ledGpio = led
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    fun unlock() {
+    fun lock() {
         ledGpio?.value = true
     }
 
-    fun lock() {
+    fun unlock() {
         ledGpio?.value = false
     }
 
