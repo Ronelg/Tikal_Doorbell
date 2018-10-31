@@ -11,16 +11,17 @@ import timber.log.Timber
 
 class KeypadPresenter : KeypadContract.Presenter {
 
-    val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatesource())
-    lateinit var doorbellCode: String
-    lateinit var view: KeypadContract.View
+    private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatesource())
+    private lateinit var doorbellCode: String
+    private lateinit var view: KeypadContract.View
+    private var codeObservable: Disposable? = null
 
     companion object {
         const val TAG = "KeypadPresenter"
     }
 
     override fun subscribe(view: KeypadContract.View) {
-        Log.i(TAG, "KeypadPresenter: init")
+        Timber.i("KeypadPresenter: init")
         this.view = view
         subscribeDatabase()
     }
@@ -29,7 +30,6 @@ class KeypadPresenter : KeypadContract.Presenter {
         codeObservable?.dispose()
     }
 
-    private var codeObservable: Disposable? = null
 
     fun subscribeDatabase() {
         codeObservable = repository.getCode()
@@ -50,6 +50,4 @@ class KeypadPresenter : KeypadContract.Presenter {
     override fun onKeypadNumberClicked(num: Int) {
         Timber.i("### onKeypadNumberClicked $num")
     }
-
-
 }

@@ -6,8 +6,6 @@ import io.reactivex.Observable
 
 class FirebaseRepository(val remoteDatesource: FirebaseRemoteDatesource) : FbRealtimeDatabase {
 
-
-
     override fun getCode(): Observable<String> {
         return remoteDatesource.getCode()
     }
@@ -15,6 +13,4 @@ class FirebaseRepository(val remoteDatesource: FirebaseRemoteDatesource) : FbRea
     override fun updateCode(code: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
 }
