@@ -25,6 +25,11 @@ import java.util.concurrent.TimeUnit
  */
 class DoorManager {
 
+    companion object {
+        private const val LED_OFF = true
+        private const val LED_ON = false
+    }
+
     private val service = PeripheralManager.getInstance()
     private var ledGpio: Gpio? = null
     private var blinker: Disposable? = null
@@ -40,11 +45,11 @@ class DoorManager {
     }
 
     fun lock() {
-        ledGpio?.value = true
+        ledGpio?.value = LED_OFF
     }
 
     fun unlock() {
-        ledGpio?.value = false
+        ledGpio?.value = LED_ON
     }
 
     fun destroy() {
