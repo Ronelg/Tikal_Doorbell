@@ -7,7 +7,9 @@ import com.google.android.things.contrib.driver.button.ButtonInputDriver
 import com.tikal.doorbell.android.BoardDefaults
 import java.io.IOException
 
-
+/**
+ * Emits KEY_ENTER on doorbell button press.
+ */
 class DoorBellButton {
 
     // Button driver associated with PI3 doorbell GPIO
@@ -34,6 +36,5 @@ class DoorBellButton {
             Log.e(BoardDefaults.HW_DOORBELL_BUTTON, "failed to initiate doorbell button driver", e)
             throw HardwareException(BoardDefaults.HW_DOORBELL_BUTTON, e.message)
         }
-
     }
 }
