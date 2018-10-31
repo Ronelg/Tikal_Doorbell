@@ -54,16 +54,14 @@ class KeypadPresenter : KeypadContract.Presenter {
     }
 
     fun verifyCode(value : String){
-        if(enteredCode.length <= DOORBELL_CODE_LENGTH){
-            if(value.equals(enteredCode)){
+        if(enteredCode.length == DOORBELL_CODE_LENGTH){
+            if(value == enteredCode.toString()){
                 view.toast("Door Open")
             }else{
                 view.toast("Invalid Code")
             }
-        } else {
             enteredCode.replace(0, enteredCode.length, "");
         }
-        view.updateEnteredCode(enteredCode.toString())
 
     }
 }
