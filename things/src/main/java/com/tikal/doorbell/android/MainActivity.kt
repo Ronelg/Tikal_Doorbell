@@ -5,10 +5,6 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.KeyEvent
 
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-
-
 /**
  * Skeleton of an Android Things activity.
  *
@@ -31,16 +27,11 @@ import com.google.firebase.storage.FirebaseStorage
  */
 class MainActivity : Activity() {
 
-    private lateinit var database: FirebaseDatabase
-    private lateinit var storage: FirebaseStorage
     private lateinit var doorManager: DoorManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        database = FirebaseDatabase.getInstance()
-//        storage = FirebaseStorage.getInstance()
 
         doorManager = DoorManager()
         doorManager.blink()
