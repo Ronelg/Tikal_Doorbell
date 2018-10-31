@@ -17,7 +17,6 @@
         android:text="@string/txt_pad_1"
         android:textAlignment="center"
         android:textSize="@dimen/txt_top_font_size"
-        android:background="@drawable/pad_selector"
         app:layout_constraintBottom_toBottomOf="@id/pad_2"
         app:layout_constraintEnd_toStartOf="@id/pad_2"
         app:layout_constraintHorizontal_chainStyle="packed"
