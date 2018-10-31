@@ -8,6 +8,8 @@ import android.view.KeyEvent
 
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.tikal.doorbell.hw.DoorBellButton
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -56,13 +58,13 @@ class MainActivity : Activity() {
         btnOnOff.setOnClickListener {
             if (isLedOn) {
                 lockDoor()
-                (it as Button).text = "On"
+                btnOnOff.text = "On"
                 if (isBlinking) {
                     doorManager.stopBlink()
                 }
             } else {
                 openDoor()
-                (it as Button).text = "Off"
+                btnOnOff.text = "Off"
             }
             isLedOn = !isLedOn
             Log.d("BtnPress", "isLedOn: $isLedOn")
@@ -116,12 +118,14 @@ class MainActivity : Activity() {
      * Plays a doorbell sound when the doorbell button is pushed.
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        Log.i("Test", "onKeyUp")
 
         // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
             Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")
-            if (mp.isPlaying)
+            if (mp.isPlaying) {
                 mp.stop()
+            }
             mp.release()
             mp = MediaPlayer.create(this, R.raw.doorbell)
             mp.start()

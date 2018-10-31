@@ -5,7 +5,6 @@ import com.google.android.things.pio.PeripheralManager
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.io.IOException
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -39,6 +38,7 @@ class DoorManager {
             val led = service.openGpio(BoardDefaults.gpioForDoor)
             led.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
             ledGpio = led
+            ledGpio?.value = LED_OFF
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -59,9 +59,9 @@ class DoorManager {
 
     fun blink() {
         blinker = Observable.interval(0L, 1L, TimeUnit.SECONDS)
-            .subscribe {
-                ledGpio?.value = it.rem(2L) == 0L
-            }
+                .subscribe {
+                    ledGpio?.value = it.rem(2L) == 0L
+                }
     }
 
     fun stopBlink() {
