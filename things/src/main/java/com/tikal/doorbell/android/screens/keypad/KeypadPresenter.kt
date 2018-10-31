@@ -1,11 +1,10 @@
 package com.tikal.doorbell.android.screens.keypad
 
 import android.util.Log
-import android.widget.Toast
-import com.tikal.doorbell.android.BaseView
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -27,11 +26,13 @@ class KeypadPresenter : KeypadContract.Presenter {
     }
 
     override fun unSubscribe() {
+        codeObservable?.dispose()
     }
 
+    private var codeObservable: Disposable? = null
 
     fun subscribeDatabase() {
-        repository.getCode()
+        codeObservable = repository.getCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

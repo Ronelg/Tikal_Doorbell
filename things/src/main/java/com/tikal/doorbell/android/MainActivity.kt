@@ -2,11 +2,12 @@ package com.tikal.doorbell.android
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
-import com.tikal.doorbell.android.R.id.btnOnOff
 import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
+import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 /**
  * Skeleton of an Android Things activity.
@@ -29,10 +30,6 @@ import com.tikal.doorbell.hw.DoorBellButton
  *
  */
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        const val TAG = "MainActivity"
-    }
 
     private lateinit var doorManager: DoorManager
     private lateinit var mp: MediaPlayer
@@ -62,11 +59,11 @@ class MainActivity : AppCompatActivity() {
                 btnOnOff.text = "Off"
             }
             isLedOn = !isLedOn
-            Log.d("BtnPress", "isLedOn: $isLedOn")
+            Timber.d("isLedOn: $isLedOn")
         }
 
         btnBlink.setOnClickListener {
-            Log.d("BtnBlink", "Blinking...")
+            Timber.d("Blinking...")
             if (isBlinking) {
                 doorManager.stopBlink()
                 btnBlink.text = "Blinking"
@@ -78,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         }
         doorManager.blink()
 
-        Log.i(TAG, "onCreate")
+        Timber.i("onCreate")
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
     }
 
@@ -117,11 +114,11 @@ class MainActivity : AppCompatActivity() {
      * Plays a doorbell sound when the doorbell button is pushed.
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-        Log.i("Test", "onKeyUp")
+        Timber.d("onKeyUp")
 
         // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
-            Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")
+            Timber.i("doorbell button pressed")
             if (mp.isPlaying) {
                 mp.stop()
             }
