@@ -41,6 +41,11 @@ class MainActivity : Activity() {
         doorManager = DoorManager()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        doorManager.destroy()
+    }
+
     private fun handleAccessDenied() {
         showAccessDenied()
         lockDoor()

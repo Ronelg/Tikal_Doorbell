@@ -41,4 +41,8 @@ class DoorManager {
     fun lock() {
         ledGpio?.value = false
     }
+
+    fun destroy() {
+        ledGpio?.close()
+    }
 }
