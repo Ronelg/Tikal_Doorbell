@@ -13,7 +13,6 @@ import com.tikal.doorbell.android.R
 import com.tikal.doorbell.android.R.id.*
 import timber.log.Timber
 import kotlinx.android.synthetic.main.keypad.*
-import kotlinx.android.synthetic.main.top.*
 
 /**
  * A simple [Fragment] subclass.
