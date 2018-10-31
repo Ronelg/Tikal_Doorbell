@@ -4,7 +4,6 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
-import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -74,16 +73,12 @@ class MainActivity : AppCompatActivity() {
             isBlinking = !isBlinking
         }
         doorManager.blink()
-
-        Timber.i("onCreate")
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, KeypadFragment())
-                .commit()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         doorManager.destroy()
+        dbButton.destroy()
     }
 
     private fun handleAccessDenied() {
@@ -116,10 +111,10 @@ class MainActivity : AppCompatActivity() {
      * Plays a doorbell sound when the doorbell button is pushed.
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-        Timber.d("onKeyUp")
+        Timber.d("onKeyUp $keyCode $event")
 
         // Plays a doorbell sound when the doorbell button is pushed.
-        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+        if (keyCode == KeyEvent.KEYCODE_F1) {
             Timber.i("doorbell button pressed")
             if (mp.isPlaying) {
                 mp.stop()
