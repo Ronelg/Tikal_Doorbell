@@ -2,8 +2,8 @@ package com.tikal.doorbell.android
 
 import android.app.Activity
 import android.os.Bundle
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 
 
 /**
@@ -30,20 +30,15 @@ class MainActivity : Activity() {
 
     private lateinit var database: FirebaseDatabase
     private lateinit var storage: FirebaseStorage
+    private lateinit var doorManager: DoorManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        database = FirebaseDatabase.getInstance();
-        storage = FirebaseStorage.getInstance();
-
-        // Initialize the doorbell button driver
-        initPIO()
-    }
-
-    private fun initPIO() {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        database = FirebaseDatabase.getInstance()
+        storage = FirebaseStorage.getInstance()
+        doorManager = DoorManager()
     }
 
     private fun handleAccessDenied() {
@@ -56,23 +51,19 @@ class MainActivity : Activity() {
         openDoor()
     }
 
-    /** Switch on the red LED. */
     private fun showAccessDenied() {
-        TODO("Switch on the red LED.")
     }
 
-    /** Switch on the green LED. */
     private fun showAccessGranted() {
-        TODO("Switch on the green LED")
     }
 
     /** Ensure the door is locked. */
     private fun lockDoor() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        doorManager.lock()
     }
 
-    /** Open the door. */
+    /** Unlock to open the door. */
     private fun openDoor() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        doorManager.unlock()
     }
 }
