@@ -34,6 +34,10 @@ import com.tikal.doorbell.hw.DoorBellButton
  */
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val TAG = "MainActivity"
+    }
+
     private lateinit var database: FirebaseDatabase
     private lateinit var storage: FirebaseStorage
     private lateinit var doorManager: DoorManager
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         doorManager = DoorManager()
         doorManager.blink()
 
+        Log.i(TAG, "onCreate")
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
     }
 
