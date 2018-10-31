@@ -26,7 +26,7 @@ class FirebaseRemoteDatesource : FbRealtimeDatabase{
     }
 
     override fun updateCode(code: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        doorbellCodeReference.setValue(code);
     }
 
 
