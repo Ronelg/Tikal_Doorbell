@@ -27,7 +27,7 @@
         android:id="@+id/input_password"
         android:layout_width="0dp"
         android:layout_height="@dimen/txt_pad_height"
-        android:background="@color/transparent"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:hint="@string/txt_password_hint"
         android:inputType="numberPassword"

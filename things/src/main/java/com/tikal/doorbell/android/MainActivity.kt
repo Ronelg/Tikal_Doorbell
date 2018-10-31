@@ -8,6 +8,7 @@ import android.view.KeyEvent
 
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 
 
 /**
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         doorManager = DoorManager()
         doorManager.blink()
 
-//        supportFragmentManager.beginTransaction().replace(R.id.container, KeypadFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
     }
 
     override fun onDestroy() {
