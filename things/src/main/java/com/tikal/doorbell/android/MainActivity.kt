@@ -11,7 +11,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
 
-
 /**
  * Skeleton of an Android Things activity.
  *
@@ -38,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "MainActivity"
     }
 
-    private lateinit var database: FirebaseDatabase
-    private lateinit var storage: FirebaseStorage
     private lateinit var doorManager: DoorManager
     private lateinit var mp: MediaPlayer
     private lateinit var dbButton: DoorBellButton
@@ -47,9 +44,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        database = FirebaseDatabase.getInstance()
-//        storage = FirebaseStorage.getInstance()
 
         dbButton = DoorBellButton()
         mp = MediaPlayer.create(this, R.raw.doorbell)
@@ -94,7 +88,6 @@ class MainActivity : AppCompatActivity() {
     /**
      */
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-
         // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
             Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")

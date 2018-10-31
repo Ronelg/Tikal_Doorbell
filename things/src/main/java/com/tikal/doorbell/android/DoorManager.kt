@@ -5,7 +5,6 @@ import com.google.android.things.pio.PeripheralManager
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.io.IOException
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
