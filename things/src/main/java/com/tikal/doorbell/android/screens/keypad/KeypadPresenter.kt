@@ -26,8 +26,8 @@ class KeypadPresenter : KeypadContract.Presenter{
 
 
     fun subscribeDatabase(){
-        repository.getCode().observeOn(Schedulers.io()).
-                subscribeOn(AndroidSchedulers.mainThread()).subscribe{value ->
+        repository.getCode().subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribe{value ->
                 doorbellCode = value;
         }
     }
