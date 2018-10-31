@@ -89,6 +89,10 @@ class MainActivity : Activity() {
         // Plays a doorbell sound when the doorbell button is pushed.
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
             Log.i(BoardDefaults.HW_DOORBELL_BUTTON, "doorbell button pressed")
+            if (mp.isPlaying)
+                mp.stop()
+            mp.release()
+            mp = MediaPlayer.create(this, R.raw.doorbell)
             mp.start()
         }
         return super.onKeyUp(keyCode, event)
