@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup
 import android.widget.Toast
-import kotlinx.android.synthetic.main.keypad.*
+import kotlinx.android.synthetic.main.keypad_activity.*
 import timber.log.Timber.d
 
 class KeypadActivity : AppCompatActivity() {
@@ -15,7 +15,7 @@ class KeypadActivity : AppCompatActivity() {
 
         setContentView(R.layout.keypad_activity)
 
-        loopViews(keypadRoot)
+        loopViews(keypad as ViewGroup)
     }
 
     private fun loopViews(view: ViewGroup) {
