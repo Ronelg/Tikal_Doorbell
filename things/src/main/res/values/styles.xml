@@ -4,7 +4,9 @@
     <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">">
     </style>
 
-    <style name="Pad.Key" parent="Widget.AppCompat.Button">
+    <style name="Pad" parent="Widget.AppCompat.Button"/>
+
+    <style name="Pad.Key" parent="Pad">
         <item name="android:textSize">@dimen/txt_top_font_size</item>
     </style>
 
