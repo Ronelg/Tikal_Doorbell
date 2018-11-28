@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.keypad.*
  * A simple [Fragment] subclass.
  *
  */
-class KeypadFragment : android.support.v4.app.Fragment(), KeypadContract.View {
+class KeypadFragment : androidx.fragment.app.Fragment(), KeypadContract.View {
 
 
     companion object {

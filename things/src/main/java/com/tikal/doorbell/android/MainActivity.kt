@@ -2,7 +2,7 @@ package com.tikal.doorbell.android
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
 import com.tikal.doorbell.android.screens.keypad.KeypadFragment
 import com.tikal.doorbell.hw.DoorBellButton
