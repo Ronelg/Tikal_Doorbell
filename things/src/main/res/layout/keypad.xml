@@ -10,42 +10,36 @@
 
     <!--..........................................row.1..........................................-->
 
-    <TextView
+    <Button
         android:id="@+id/pad_1"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_1"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_2"
         app:layout_constraintEnd_toStartOf="@id/pad_2"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/pad_2" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_2"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_2"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toTopOf="@id/pad_5"
         app:layout_constraintEnd_toStartOf="@+id/pad_3"
         app:layout_constraintStart_toEndOf="@id/pad_1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_3"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_3"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/pad_2"
@@ -53,41 +47,35 @@
 
     <!--..........................................row.2..........................................-->
 
-    <TextView
+    <Button
         android:id="@+id/pad_4"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_4"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_5"
         app:layout_constraintEnd_toStartOf="@id/pad_5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/pad_5" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_5"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_5"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toTopOf="@id/pad_8"
         app:layout_constraintEnd_toStartOf="@+id/pad_6"
         app:layout_constraintStart_toEndOf="@id/pad_4"
         app:layout_constraintTop_toBottomOf="@+id/pad_2" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_6"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_6"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/pad_5"
@@ -95,41 +83,35 @@
 
     <!--..........................................row.3..........................................-->
 
-    <TextView
+    <Button
         android:id="@+id/pad_7"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_7"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_8"
         app:layout_constraintEnd_toStartOf="@id/pad_8"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/pad_8" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_8"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_8"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toTopOf="@id/pad_0"
         app:layout_constraintEnd_toStartOf="@+id/pad_9"
         app:layout_constraintStart_toEndOf="@id/pad_7"
         app:layout_constraintTop_toBottomOf="@+id/pad_5" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_9"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_9"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/pad_8"
@@ -137,42 +119,36 @@
 
     <!--..........................................row.3..........................................-->
 
-    <TextView
+    <Button
         android:id="@+id/pad_star"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_star"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_0"
         app:layout_constraintEnd_toStartOf="@id/pad_0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/pad_0" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_0"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
         android:layout_marginBottom="8dp"
-        android:gravity="center"
         android:text="@string/txt_pad_0"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/pad_hash_tag"
         app:layout_constraintStart_toEndOf="@id/pad_star"
         app:layout_constraintTop_toBottomOf="@+id/pad_8" />
 
-    <TextView
+    <Button
         android:id="@+id/pad_hash_tag"
+        style="@style/Pad.Key"
         android:layout_width="@dimen/txt_pad_width"
         android:layout_height="@dimen/txt_pad_height"
-        android:gravity="center"
         android:text="@string/txt_pad_hash_tag"
-        android:textAlignment="center"
-        android:textSize="@dimen/txt_top_font_size"
         app:layout_constraintBottom_toBottomOf="@id/pad_0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/pad_0"

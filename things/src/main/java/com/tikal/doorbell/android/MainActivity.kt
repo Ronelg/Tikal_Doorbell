@@ -2,9 +2,8 @@ package com.tikal.doorbell.android
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.KeyEvent
-import com.tikal.doorbell.android.screens.keypad.KeypadFragment
+import androidx.appcompat.app.AppCompatActivity
 import com.tikal.doorbell.hw.DoorBellButton
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -75,8 +74,6 @@ class MainActivity : AppCompatActivity() {
             isBlinking = !isBlinking
         }
         doorManager.blink()
-
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, KeypadFragment()).commit()
     }
 
     override fun onDestroy() {
