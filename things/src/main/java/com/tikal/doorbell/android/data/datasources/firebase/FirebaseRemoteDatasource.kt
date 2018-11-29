@@ -6,18 +6,13 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import timber.log.Timber
 
-class FirebaseRemoteDatesource : FbRealtimeDatabase {
+class FirebaseRemoteDatasource : FbRealtimeDatabase {
 
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val doorbellCodeReference: DatabaseReference
+    private val doorbellCodeReference: DatabaseReference = database.getReference(DOORBELL_CODE_REFERENCE)
     private val subject: Subject<String> = PublishSubject.create<String>()
 
-    companion object {
-        private const val DOORBELL_CODE_REFERENCE = "doorbell_code"
-    }
-
     init {
-        doorbellCodeReference = database.getReference(DOORBELL_CODE_REFERENCE)
         setFirebaseListener()
     }
 
@@ -35,10 +30,13 @@ class FirebaseRemoteDatesource : FbRealtimeDatabase {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Timber.i("###${snapshot.value}")
+                Timber.i("### ${snapshot.value}")
                 subject.onNext(snapshot.value.toString())
             }
-
         })
+    }
+
+    companion object {
+        private const val DOORBELL_CODE_REFERENCE = "doorbell_code"
     }
 }

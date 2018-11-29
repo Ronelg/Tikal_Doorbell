@@ -1,13 +1,13 @@
 package com.tikal.doorbell.android.data.repositories.firebase
 
 import com.tikal.doorbell.android.data.datasources.firebase.FbRealtimeDatabase
-import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
+import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatasource
 import io.reactivex.Observable
 
-class FirebaseRepository(val remoteDatesource: FirebaseRemoteDatesource) : FbRealtimeDatabase {
+class FirebaseRepository(val remoteDatasource: FirebaseRemoteDatasource) : FbRealtimeDatabase {
 
     override fun getCode(): Observable<String> {
-        return remoteDatesource.getCode()
+        return remoteDatasource.getCode()
     }
 
     override fun updateCode(code: String) {

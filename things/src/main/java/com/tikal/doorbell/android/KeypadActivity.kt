@@ -30,45 +30,45 @@ class KeypadActivity : AppCompatActivity() {
         d("view click")
         when (view.id) {
             R.id.pad_1 -> {
-                showMessasge(view, "pad1")
+                showMessage(view, "pad1")
             }
             R.id.pad_2 -> {
-                showMessasge(view, "pad2")
+                showMessage(view, "pad2")
             }
             R.id.pad_3 -> {
-                showMessasge(view, "pad3")
+                showMessage(view, "pad3")
             }
             R.id.pad_4 -> {
-                showMessasge(view, "pad4")
+                showMessage(view, "pad4")
             }
             R.id.pad_5 -> {
-                showMessasge(view, "pad5")
+                showMessage(view, "pad5")
             }
             R.id.pad_6 -> {
-                showMessasge(view, "pad6")
+                showMessage(view, "pad6")
             }
             R.id.pad_7 -> {
-                showMessasge(view, "pad7")
+                showMessage(view, "pad7")
             }
             R.id.pad_8 -> {
-                showMessasge(view, "pad8")
+                showMessage(view, "pad8")
             }
             R.id.pad_9 -> {
-                showMessasge(view, "pad9")
+                showMessage(view, "pad9")
             }
             R.id.pad_0 -> {
-                showMessasge(view, "pad0")
+                showMessage(view, "pad0")
             }
             R.id.pad_star -> {
-                showMessasge(view, "pad_star")
+                showMessage(view, "pad_star")
             }
             R.id.pad_hash_tag -> {
-                showMessasge(view, "pad_hash_tag")
+                showMessage(view, "pad_hash_tag")
             }
         }
     }
 
-    private fun showMessasge(view: View, text: String) {
+    private fun showMessage(view: View, text: String) {
         d(text)
         Toast.makeText(view.context, text,Toast.LENGTH_SHORT).show()
     }

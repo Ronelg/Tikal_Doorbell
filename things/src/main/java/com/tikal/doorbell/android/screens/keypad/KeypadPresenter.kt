@@ -1,6 +1,6 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
+import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatasource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
 import com.tikal.lang.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +13,7 @@ class KeypadPresenter : KeypadContract.Presenter {
 
     private lateinit var doorbellCode: String
     private lateinit var view: KeypadContract.View
-    private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatesource())
+    private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
 
     private val enteredCode = StringBuilder()
 
@@ -38,7 +38,6 @@ class KeypadPresenter : KeypadContract.Presenter {
                             doorbellCode = it
                             Timber.i("### $it")
                             view.toast(it)
-
                         },
                         onError = { Timber.e(it) }
                 )
