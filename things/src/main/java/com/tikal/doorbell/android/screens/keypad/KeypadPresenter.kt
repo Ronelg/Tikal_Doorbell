@@ -2,28 +2,26 @@ package com.tikal.doorbell.android.screens.keypad
 
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
+import com.tikal.lang.compareTo
+import com.tikal.lang.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.lang.StringBuilder
 
 class KeypadPresenter : KeypadContract.Presenter {
 
     private lateinit var doorbellCode: String
     private lateinit var view: KeypadContract.View
-    val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatesource())
+    private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatesource())
 
-    val enteredCode = StringBuffer()
+    private val enteredCode = StringBuilder()
 
-    companion object {
-        const val TAG = "KeypadPresenter"
-        const val DOORBELL_CODE_LENGTH = 4;
-    }
     private var codeObservable: Disposable? = null
 
     override fun subscribe(view: KeypadContract.View) {
-        Timber.i("KeypadPresenter: init")
         this.view = view
         subscribeDatabase()
     }
@@ -32,7 +30,8 @@ class KeypadPresenter : KeypadContract.Presenter {
         codeObservable?.dispose()
     }
 
-    fun subscribeDatabase() {
+    private fun subscribeDatabase() {
+        Timber.v("subscribeDatabase")
         codeObservable = repository.getCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,23 +44,21 @@ class KeypadPresenter : KeypadContract.Presenter {
                         },
                         onError = { Timber.e(it) }
                 )
-
     }
 
     override fun onKeypadNumberClicked(value: String) {
-        enteredCode.append(value)
+        enteredCode += value
         verifyCode(value)
     }
 
-    fun verifyCode(value : String){
-        if(enteredCode.length == DOORBELL_CODE_LENGTH){
-            if(value == enteredCode.toString()){
+    private fun verifyCode(value: String) {
+        if (value.length == enteredCode.length) {
+            if (value.compareTo(enteredCode) == 0) {
                 view.toast("Door Open")
-            }else{
+            } else {
                 view.toast("Invalid Code")
             }
-            enteredCode.replace(0, enteredCode.length, "");
+            enteredCode.clear()
         }
-
     }
 }
