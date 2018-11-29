@@ -2,14 +2,12 @@ package com.tikal.doorbell.android.screens.keypad
 
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatesource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
-import com.tikal.lang.compareTo
 import com.tikal.lang.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.lang.StringBuilder
 
 class KeypadPresenter : KeypadContract.Presenter {
 
@@ -53,7 +51,7 @@ class KeypadPresenter : KeypadContract.Presenter {
 
     private fun verifyCode(value: String) {
         if (value.length == enteredCode.length) {
-            if (value.compareTo(enteredCode) == 0) {
+            if (value == enteredCode.toString()) {
                 view.toast("Door Open")
             } else {
                 view.toast("Invalid Code")

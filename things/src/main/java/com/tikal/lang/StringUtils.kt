@@ -7,7 +7,3 @@ operator fun StringBuilder.plus(s: CharSequence): StringBuilder {
 operator fun StringBuilder.plusAssign(obj: Any?) {
     append(obj)
 }
-
-operator fun String.compareTo(s: CharSequence): Int {
-    return this.compareTo(s.toString())
-}
