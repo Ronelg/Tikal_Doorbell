@@ -1,12 +1,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
     </style>
 
-    <style name="Pad" parent="Widget.AppCompat.Button"/>
+    <style name="Pad" />
 
-    <style name="Pad.Key" parent="Pad">
+    <style name="Pad.Key" parent="Widget.AppCompat.Button">
         <item name="android:textSize">@dimen/txt_top_font_size</item>
     </style>
 
