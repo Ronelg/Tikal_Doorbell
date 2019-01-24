@@ -16,12 +16,14 @@ class KeypadPresenter : KeypadContract.Presenter {
     private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
 
     private val enteredCode = StringBuilder()
+    private val repository : FirebaseRepository
 
     private var codeObservable: Disposable? = null
 
     override fun subscribe(view: KeypadContract.View) {
         this.view = view
         subscribeDatabase()
+        repository = FirebaseRepo
     }
 
     override fun unsubscribe() {
@@ -49,6 +51,7 @@ class KeypadPresenter : KeypadContract.Presenter {
     }
 
     private fun verifyCode(value: String) {
+        Timber.i("Verifying code: $value")
         if (value.length == enteredCode.length) {
             if (value == enteredCode.toString()) {
                 view.toast("Door Open")
