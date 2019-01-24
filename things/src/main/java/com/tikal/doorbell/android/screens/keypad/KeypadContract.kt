@@ -11,6 +11,8 @@ interface KeypadContract {
     interface View : BaseView {
         fun toast(text: String)
         fun updateEnteredCode(enteredCode: String)
+        fun showAccessDenied()
+        fun showAccessGranted()
     }
 }
 

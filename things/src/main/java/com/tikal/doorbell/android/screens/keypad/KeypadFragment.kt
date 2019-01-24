@@ -1,11 +1,11 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import android.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.tikal.doorbell.android.BasePresenter
 import com.tikal.doorbell.android.R
 import kotlinx.android.synthetic.main.keypad.*
@@ -15,7 +15,7 @@ import timber.log.Timber
  * A simple [Fragment] subclass.
  *
  */
-class KeypadFragment : androidx.fragment.app.Fragment(), KeypadContract.View {
+class KeypadFragment : Fragment(), KeypadContract.View {
 
     private val presenter: KeypadPresenter = KeypadPresenter()
 
@@ -61,4 +61,11 @@ class KeypadFragment : androidx.fragment.app.Fragment(), KeypadContract.View {
         Toast.makeText(context, enteredCode, Toast.LENGTH_SHORT).show()
     }
 
+    override fun showAccessDenied() {
+        toast(getString(R.string.access_denied))
+    }
+
+    override fun showAccessGranted() {
+        toast(getString(R.string.access_granted))
+    }
 }
