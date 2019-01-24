@@ -1,4 +1,4 @@
-package com.tikal.doorbell.android.data
+package com.bartovapps.core.data.datasources.firebase
 
 import io.reactivex.Observable
 

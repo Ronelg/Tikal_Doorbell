@@ -1,7 +1,7 @@
 package com.tikal.doorbell.android.repository
 
-import com.tikal.doorbell.android.data.FirebaseRemoteDatasource
-import com.tikal.doorbell.android.repository.firebase_repository.FirebaseRepository
+import com.bartovapps.core.data.datasources.firebase.FirebaseRemoteDatasource
+import com.bartovapps.core.data.repositories.firebase_repository.FirebaseRepository
 import io.reactivex.Observable
 
 class AppRepository {

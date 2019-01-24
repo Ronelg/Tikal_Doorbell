@@ -1,7 +1,7 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatasource
-import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
+import com.bartovapps.core.data.datasources.firebase.FirebaseRemoteDatasource
+import com.bartovapps.core.data.repositories.firebase_repository.FirebaseRepository
 import com.tikal.lang.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -16,14 +16,12 @@ class KeypadPresenter : KeypadContract.Presenter {
     private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
 
     private val enteredCode = StringBuilder()
-    private val repository : FirebaseRepository
 
     private var codeObservable: Disposable? = null
 
     override fun subscribe(view: KeypadContract.View) {
         this.view = view
         subscribeDatabase()
-        repository = FirebaseRepo
     }
 
     override fun unsubscribe() {
@@ -35,14 +33,13 @@ class KeypadPresenter : KeypadContract.Presenter {
         codeObservable = repository.getCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
+                .subscribe(
+                        {
                             doorbellCode = it
                             Timber.i("### $it")
                             view.toast(it)
-                        },
-                        onError = { Timber.e(it) }
-                )
+                        }
+                ) { Timber.e(it) }
     }
 
     override fun onKeypadNumberClicked(value: String) {
