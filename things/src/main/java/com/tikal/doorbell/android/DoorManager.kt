@@ -28,11 +28,14 @@ class DoorManager {
     companion object {
         private const val LED_OFF = true
         private const val LED_ON = false
+
+        private const val CLOSE_THE_DOOR = 5L
     }
 
     private val service = PeripheralManager.getInstance()
     private var ledGpio: Gpio? = null
     private var blinker: Disposable? = null
+    private var closeTheDoor: Disposable? = null
 
     init {
         Timber.v("init")
@@ -54,12 +57,25 @@ class DoorManager {
     fun unlock() {
         Timber.v("unlock")
         ledGpio?.value = LED_ON
-        //TODO re-lock after 5 seconds
+
+        // re-lock after 5 seconds.
+        closeTheDoor?.dispose()
+        closeTheDoor = Observable.timer(CLOSE_THE_DOOR, TimeUnit.SECONDS)
+                .subscribe(
+                        {
+                            Timber.v("door unlocked for too long")
+                            lock()
+                        },
+                        { err ->
+                            Timber.e(err)
+                            lock()
+                        })
     }
 
     fun destroy() {
         Timber.v("destroy")
         blinker?.dispose()
+        closeTheDoor?.dispose()
         ledGpio?.close()
     }
 
