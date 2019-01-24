@@ -3,34 +3,58 @@ package com.tikal.doorbell.android.screens.keypad
 import com.bartovapps.core.data.datasources.firebase.FirebaseRemoteDatasource
 import com.bartovapps.core.data.repositories.firebase_repository.FirebaseRepository
 import com.tikal.lang.plusAssign
+import com.tikal.doorbell.android.DoorManager
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import timber.log.Timber.d
+import timber.log.Timber.v
 
 class KeypadPresenter : KeypadContract.Presenter {
 
     private lateinit var doorbellCode: String
     private lateinit var view: KeypadContract.View
     private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
+    private lateinit var doorManager: DoorManager
 
-    private val enteredCode = StringBuilder()
+    private var enteredCode = ""
 
-    private var codeObservable: Disposable? = null
+    private val compositeDisposable = CompositeDisposable()
 
     override fun subscribe(view: KeypadContract.View) {
         this.view = view
         subscribeDatabase()
+        doorManager = DoorManager()
     }
 
     override fun unsubscribe() {
-        codeObservable?.dispose()
+        compositeDisposable.clear()
+        doorManager.destroy()
+    }
+
+    override fun onKeypadNumberClicked(value: String) {
+        d("onKeypadNumberClicked %s", value)
+        enteredCode = value
+        verifyCode(enteredCode)
+    }
+
+    private fun verifyCode(code: String) {
+        d("verifyCode")
+        if (doorbellCode == code) {
+            handleAccessGranted()
+        } else {
+            handleAccessDenied()
+        }
+        enteredCode = ""
+        view.updateEnteredCode(enteredCode)
     }
 
     private fun subscribeDatabase() {
-        Timber.v("subscribeDatabase")
-        codeObservable = repository.getCode()
+        v("subscribeDatabase")
+        repository.getCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -42,20 +66,23 @@ class KeypadPresenter : KeypadContract.Presenter {
                 ) { Timber.e(it) }
     }
 
-    override fun onKeypadNumberClicked(value: String) {
-        enteredCode += value
-        verifyCode(value)
+    private fun handleAccessDenied() {
+        view.showAccessDenied()
+        lockDoor()
     }
 
-    private fun verifyCode(value: String) {
-        Timber.i("Verifying code: $value")
-        if (value.length == enteredCode.length) {
-            if (value == enteredCode.toString()) {
-                view.toast("Door Open")
-            } else {
-                view.toast("Invalid Code")
-            }
-            enteredCode.clear()
-        }
+    private fun handleAccessGranted() {
+        view.showAccessGranted()
+        openDoor()
+    }
+
+    /** Ensure the door is locked. */
+    private fun lockDoor() {
+        doorManager.lock()
+    }
+
+    /** Unlock to open the door. */
+    private fun openDoor() {
+        doorManager.unlock()
     }
 }

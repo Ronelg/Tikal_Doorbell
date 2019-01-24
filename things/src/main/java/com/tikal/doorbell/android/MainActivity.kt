@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         dbButton = DoorBellButton()
         mp = MediaPlayer.create(this, R.raw.doorbell)
 
@@ -73,7 +72,6 @@ class MainActivity : AppCompatActivity() {
             }
             isBlinking = !isBlinking
         }
-        doorManager.blink()
     }
 
     override fun onDestroy() {

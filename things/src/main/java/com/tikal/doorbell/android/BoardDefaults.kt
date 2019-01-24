@@ -13,7 +13,7 @@ object BoardDefaults {
     val gpioForButton: String
         get() {
             return when (Build.DEVICE) {
-                DEVICE_RPI3 -> "BCM21"
+                DEVICE_RPI3 -> "BCM16"
                 DEVICE_IMX7D_PICO -> "GPIO6_IO14"
                 else -> throw IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE)
             }
@@ -25,7 +25,7 @@ object BoardDefaults {
     val gpioForDoor: String
         get() {
             return when (Build.DEVICE) {
-                DEVICE_RPI3 -> "BCM16"
+                DEVICE_RPI3 -> "BCM21"
                 DEVICE_IMX7D_PICO -> "GPIO6_IO12"
                 else -> throw IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE)
             }
