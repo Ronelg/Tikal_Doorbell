@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.tikal.doorbell.android.BasePresenter
-import com.tikal.doorbell.android.R
 import kotlinx.android.synthetic.main.keypad.*
 import timber.log.Timber
+import android.annotation.SuppressLint
+import com.tikal.doorbell.android.R
+import com.tikal.doorbell.android.utils.RxEditText
+import io.reactivex.android.schedulers.AndroidSchedulers
+import java.util.concurrent.TimeUnit
+
 
 /**
  * A simple [Fragment] subclass.
@@ -39,17 +44,31 @@ class KeypadFragment : androidx.fragment.app.Fragment(), KeypadContract.View {
         presenter.unsubscribe()
     }
 
+    @SuppressLint("CheckResult")
     private fun setupViews() {
-        pad_1.setOnClickListener { presenter.onKeypadNumberClicked("1") }
-        pad_2.setOnClickListener { presenter.onKeypadNumberClicked("2") }
-        pad_3.setOnClickListener { presenter.onKeypadNumberClicked("3") }
-        pad_4.setOnClickListener { presenter.onKeypadNumberClicked("4") }
-        pad_5.setOnClickListener { presenter.onKeypadNumberClicked("5") }
-        pad_6.setOnClickListener { presenter.onKeypadNumberClicked("6") }
-        pad_7.setOnClickListener { presenter.onKeypadNumberClicked("7") }
-        pad_8.setOnClickListener { presenter.onKeypadNumberClicked("8") }
-        pad_9.setOnClickListener { presenter.onKeypadNumberClicked("9") }
-        pad_0.setOnClickListener { presenter.onKeypadNumberClicked("0") }
+        pad_1.setOnClickListener { onKeypadNumberClicked("1") }
+        pad_2.setOnClickListener { onKeypadNumberClicked("2") }
+        pad_3.setOnClickListener { onKeypadNumberClicked("3") }
+        pad_4.setOnClickListener { onKeypadNumberClicked("4") }
+        pad_5.setOnClickListener { onKeypadNumberClicked("5") }
+        pad_6.setOnClickListener { onKeypadNumberClicked("6") }
+        pad_7.setOnClickListener { onKeypadNumberClicked("7") }
+        pad_8.setOnClickListener { onKeypadNumberClicked("8") }
+        pad_9.setOnClickListener { onKeypadNumberClicked("9") }
+        pad_0.setOnClickListener { onKeypadNumberClicked("0") }
+
+        RxEditText.fromEditText(etKeyCode)
+                .debounce(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { t: String? ->
+                    if (t != null) {
+                        presenter.onKeypadNumberClicked(t)
+                    }
+                }
+    }
+
+    private fun onKeypadNumberClicked(number: String) {
+        etKeyCode.text.append(number)
     }
 
     override fun toast(text: String) {
@@ -57,7 +76,7 @@ class KeypadFragment : androidx.fragment.app.Fragment(), KeypadContract.View {
     }
 
     override fun updateEnteredCode(enteredCode: String) {
-//        txt_top.text = enteredCode
+        etKeyCode.setText(enteredCode)
         Toast.makeText(context, enteredCode, Toast.LENGTH_SHORT).show()
     }
 

@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--<EditText-->
+        <!--android:id="@+id/etPassword"-->
+        <!--android:width="0dp"-->
+        <!--android:height="50dp"-->
+        <!--android:inputType="numberPassword"-->
+        <!--android:text="asdasdasd"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
     <include
         android:id="@+id/keypad"
         layout="@layout/keypad"

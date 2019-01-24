@@ -21,7 +21,7 @@ class FirebaseRemoteDatasource : FbRealtimeDatabase {
     }
 
     override fun updateCode(code: String) {
-        doorbellCodeReference.setValue(code);
+        doorbellCodeReference.setValue(code)
     }
 
     private fun setFirebaseListener() {
