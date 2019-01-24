@@ -4,23 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<EditText-->
-        <!--android:id="@+id/etPassword"-->
-        <!--android:width="0dp"-->
-        <!--android:height="50dp"-->
-        <!--android:inputType="numberPassword"-->
-        <!--android:text="asdasdasd"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <include
+    <fragment
         android:id="@+id/keypad"
-        layout="@layout/keypad"
+        android:name="com.tikal.doorbell.android.screens.keypad.KeypadFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
