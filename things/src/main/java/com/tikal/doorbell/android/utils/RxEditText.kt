@@ -14,8 +14,6 @@ import java.util.*
 
 object RxEditText {
 
-    val SEARCH_TIMEOUT: Long = 400
-
     fun fromEditText(@NonNull editText: EditText): BehaviorSubject<String> {
         val subject = BehaviorSubject.create<String>()
 

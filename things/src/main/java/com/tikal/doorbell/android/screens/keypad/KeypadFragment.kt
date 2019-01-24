@@ -77,7 +77,6 @@ class KeypadFragment : Fragment(), KeypadContract.View {
 
     override fun updateEnteredCode(enteredCode: String) {
         etKeyCode.setText(enteredCode)
-        Toast.makeText(context, enteredCode, Toast.LENGTH_SHORT).show()
     }
 
     override fun showAccessDenied() {
