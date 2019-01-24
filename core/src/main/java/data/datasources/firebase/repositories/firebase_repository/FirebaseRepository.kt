@@ -1,7 +1,7 @@
-package com.bartovapps.core.data.repositories.firebase_repository
+package data.datasources.firebase.repositories.firebase_repository
 
-import com.bartovapps.core.data.datasources.firebase.FbRealtimeDatabase
-import com.bartovapps.core.data.datasources.firebase.FirebaseRemoteDatasource
+import data.datasources.firebase.FbRealtimeDatabase
+import data.datasources.firebase.FirebaseRemoteDatasource
 import io.reactivex.Observable
 
 class FirebaseRepository(val remoteDatasource: FirebaseRemoteDatasource) : FbRealtimeDatabase {

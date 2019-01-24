@@ -1,4 +1,4 @@
-package com.bartovapps.core.data.datasources.firebase
+package data.datasources.firebase
 
 import com.google.firebase.database.*
 import io.reactivex.Observable
