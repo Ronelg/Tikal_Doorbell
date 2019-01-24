@@ -1,9 +1,11 @@
 package com.tikal.doorbell.android.screens.keypad
 
+import com.tikal.doorbell.android.DoorManager
 import com.tikal.doorbell.android.data.datasources.firebase.FirebaseRemoteDatasource
 import com.tikal.doorbell.android.data.repositories.firebase.FirebaseRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -15,32 +17,35 @@ class KeypadPresenter : KeypadContract.Presenter {
     private lateinit var doorbellCode: String
     private lateinit var view: KeypadContract.View
     private val repository: FirebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
+    private lateinit var doorManager: DoorManager
 
     private var enteredCode = ""
 
-    private val mCompositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     override fun subscribe(view: KeypadContract.View) {
         this.view = view
         subscribeDatabase()
+        doorManager = DoorManager()
     }
 
     override fun unsubscribe() {
-        mCompositeDisposable.clear()
+        compositeDisposable.clear()
+        doorManager.destroy()
     }
 
     override fun onKeypadNumberClicked(value: String) {
-        d("onKeypadNumberClicked")
+        d("onKeypadNumberClicked %s", value)
         enteredCode = value
-        verifyCode()
+        verifyCode(enteredCode)
     }
 
-    private fun verifyCode() {
+    private fun verifyCode(code: String) {
         d("verifyCode")
-        if (doorbellCode == enteredCode) {
-            view.toast("Door Open")
+        if (doorbellCode == code) {
+            handleAccessGranted()
         } else {
-            view.toast("Invalid Code")
+            handleAccessDenied()
         }
         enteredCode = ""
         view.updateEnteredCode(enteredCode)
@@ -48,17 +53,37 @@ class KeypadPresenter : KeypadContract.Presenter {
 
     private fun subscribeDatabase() {
         v("subscribeDatabase")
-        val codeObservable = repository.getCode()
+        repository.getCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                        onNext = {
-                            doorbellCode = it
-                            Timber.i("### $it")
-                            view.toast(it)
+                        onNext = { code ->
+                            doorbellCode = code
+                            Timber.i("### $code")
+                            view.toast(code)
                         },
                         onError = { Timber.e(it) }
                 )
-        mCompositeDisposable.add(codeObservable)
+                .addTo(compositeDisposable)
+    }
+
+    private fun handleAccessDenied() {
+        view.showAccessDenied()
+        lockDoor()
+    }
+
+    private fun handleAccessGranted() {
+        view.showAccessGranted()
+        openDoor()
+    }
+
+    /** Ensure the door is locked. */
+    private fun lockDoor() {
+        doorManager.lock()
+    }
+
+    /** Unlock to open the door. */
+    private fun openDoor() {
+        doorManager.unlock()
     }
 }

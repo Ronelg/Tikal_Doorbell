@@ -1,5 +1,6 @@
 package com.tikal.doorbell.android.screens.keypad
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.tikal.doorbell.android.BasePresenter
-import kotlinx.android.synthetic.main.keypad.*
-import timber.log.Timber
-import android.annotation.SuppressLint
 import com.tikal.doorbell.android.R
 import com.tikal.doorbell.android.utils.RxEditText
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.keypad.*
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
-
 
 /**
  * A simple [Fragment] subclass.
