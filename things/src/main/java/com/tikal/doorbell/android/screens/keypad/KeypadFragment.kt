@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.tikal.doorbell.android.BasePresenter
+import com.tikal.BasePresenter
 import com.tikal.doorbell.android.R
 import com.tikal.doorbell.android.utils.RxEditText
 import io.reactivex.android.schedulers.AndroidSchedulers

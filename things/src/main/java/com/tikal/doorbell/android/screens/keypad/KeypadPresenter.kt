@@ -1,5 +1,6 @@
 package com.tikal.doorbell.android.screens.keypad
 
+import com.tikal.BaseView
 import com.tikal.doorbell.android.DoorManager
 import com.tikal.doorbell.data.datasources.firebase.FirebaseRemoteDatasource
 import com.tikal.doorbell.data.repository.FirebaseRepository
@@ -22,8 +23,8 @@ class KeypadPresenter : KeypadContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun subscribe(view: KeypadContract.View) {
-        this.view = view
+    override fun subscribe(view: BaseView) {
+        this.view = view as KeypadContract.View
         subscribeDatabase()
         doorManager = DoorManager()
     }

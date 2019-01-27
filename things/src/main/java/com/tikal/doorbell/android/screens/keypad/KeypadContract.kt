@@ -1,7 +1,7 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import com.tikal.doorbell.android.BasePresenter
-import com.tikal.doorbell.android.BaseView
+import com.tikal.BasePresenter
+import com.tikal.BaseView
 
 interface KeypadContract {
     interface Presenter : BasePresenter {
