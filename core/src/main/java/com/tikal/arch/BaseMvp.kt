@@ -1,4 +1,4 @@
-package com.tikal
+package com.tikal.arch
 
 interface BasePresenter {
     fun subscribe(view: BaseView)

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.tikal.BasePresenter
+import com.tikal.arch.BasePresenter
 import com.tikal.doorbell.android.R
 import com.tikal.doorbell.android.utils.RxEditText
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit
 
 /**
  * A simple [Fragment] subclass.
- *
  */
 class KeypadFragment : Fragment(), KeypadContract.View {
 

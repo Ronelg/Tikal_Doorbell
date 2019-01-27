@@ -1,6 +1,6 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import com.tikal.BaseView
+import com.tikal.arch.BaseView
 import com.tikal.doorbell.android.DoorManager
 import com.tikal.doorbell.data.datasources.firebase.FirebaseRemoteDatasource
 import com.tikal.doorbell.data.repository.FirebaseRepository
@@ -57,12 +57,13 @@ class KeypadPresenter : KeypadContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        {
-                            doorbellCode = it
-                            Timber.i("### $it")
-                            view.toast(it)
-                        }
-                ) { Timber.e(it) }
+                        { code ->
+                            doorbellCode = code
+                            Timber.i("### $code ###")
+                            view.toast(code)
+                        },
+                        { Timber.e(it) }
+                )
                 .addTo(compositeDisposable)
     }
 
