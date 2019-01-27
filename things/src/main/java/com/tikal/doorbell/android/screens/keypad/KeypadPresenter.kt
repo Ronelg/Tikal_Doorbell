@@ -5,6 +5,7 @@ import data.datasources.firebase.repositories.firebase_repository.FirebaseReposi
 import com.tikal.doorbell.android.DoorManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import timber.log.Timber.d
@@ -61,6 +62,7 @@ class KeypadPresenter : KeypadContract.Presenter {
                             view.toast(it)
                         }
                 ) { Timber.e(it) }
+                .addTo(compositeDisposable)
     }
 
     private fun handleAccessDenied() {
