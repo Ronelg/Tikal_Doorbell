@@ -1,7 +1,7 @@
-package data.datasources.firebase.repositories.firebase_repository
+package com.tikal.doorbell.data.repository
 
-import data.datasources.firebase.FbRealtimeDatabase
-import data.datasources.firebase.FirebaseRemoteDatasource
+import com.tikal.doorbell.data.datasources.firebase.FbRealtimeDatabase
+import com.tikal.doorbell.data.datasources.firebase.FirebaseRemoteDatasource
 import io.reactivex.Observable
 
 class FirebaseRepository(val remoteDatasource: FirebaseRemoteDatasource) : FbRealtimeDatabase {

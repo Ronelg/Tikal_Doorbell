@@ -1,4 +1,4 @@
-package data.datasources.firebase
+package com.tikal.doorbell.data.datasources.firebase
 
 import io.reactivex.Observable
 

@@ -1,8 +1,8 @@
 package com.tikal.doorbell.android.screens.keypad
 
-import data.datasources.firebase.FirebaseRemoteDatasource
-import data.datasources.firebase.repositories.firebase_repository.FirebaseRepository
 import com.tikal.doorbell.android.DoorManager
+import com.tikal.doorbell.data.datasources.firebase.FirebaseRemoteDatasource
+import com.tikal.doorbell.data.repository.FirebaseRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo

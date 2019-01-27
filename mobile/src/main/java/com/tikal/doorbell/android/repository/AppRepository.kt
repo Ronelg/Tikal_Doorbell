@@ -1,13 +1,12 @@
 package com.tikal.doorbell.android.repository
 
-import data.datasources.firebase.FirebaseRemoteDatasource
-import data.datasources.firebase.repositories.firebase_repository.FirebaseRepository
+import com.tikal.doorbell.data.datasources.firebase.FirebaseRemoteDatasource
+import com.tikal.doorbell.data.repository.FirebaseRepository
 import io.reactivex.Observable
 
 class AppRepository {
 
     val firebaseRepository : FirebaseRepository
-
 
     init {
         firebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
