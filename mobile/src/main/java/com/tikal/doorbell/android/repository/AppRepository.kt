@@ -6,14 +6,14 @@ import io.reactivex.Observable
 
 class AppRepository {
 
-    val firebaseRepository : FirebaseRepository
+    val firebaseRepository: FirebaseRepository
 
     init {
         firebaseRepository = FirebaseRepository(FirebaseRemoteDatasource())
     }
 
-    fun getDoorCode() : Observable<String>{
-        return  firebaseRepository.getCode()
+    fun getDoorCode(): Observable<String> {
+        return firebaseRepository.getCode()
     }
 
 }
